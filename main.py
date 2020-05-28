@@ -2,6 +2,7 @@ from tkinter import *
 import rotacion
 import tiempo
 import math
+import numpy as np
 window = Tk()
 
 window.title("Programa de Habilita avilita")
@@ -60,6 +61,7 @@ angle1 = Entry(window, width=10)
 angle1.grid(column=1, row=13)
 angle2 = Entry(window, width=10)
 angle2.grid(column=1, row=14)
+result = np.array(1)
 
 
 def rot():
@@ -67,10 +69,23 @@ def rot():
     a2 = math.radians(float(angle2.get()))
     r1 = int(option1.get())
     r2 = int(option2.get())
-    print(rotacion.matrotacion(a1, a2, r1, r2))
+    global result
+    result = rotacion.matrotacion(a1, a2, r1, r2)
+    print(result)
+
+
+def rot2():
+    a1 = math.radians(float(angle1.get()))
+    a2 = math.radians(float(angle2.get()))
+    r1 = int(option1.get())
+    r2 = int(option2.get())
+    result2 = rotacion.mat3rotacion(a1, r1, result)
+    print(result2)
 
 
 btn = Button(window, text="Rot", command=rot)
 btn.grid(column=1, row=15)
+btn = Button(window, text="Segunda Rot", command=rot2)
+btn.grid(column=1, row=16)
 window.geometry("800x600")
 window.mainloop()
